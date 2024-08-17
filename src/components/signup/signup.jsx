@@ -5,6 +5,7 @@ function Signup() {
   const [data, setData] = useState({
     email: "",
     password: "",
+    confirmPass: "",
   });
 
   const handleInputClick = (e) => {
@@ -26,13 +27,14 @@ function Signup() {
         <h1>Welcome to Song Application</h1>
       </div>
       <div className="">
-        <h2>Sign-up Here</h2>
+        <h2>Signup Here</h2>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="form">
           <div>
             <label htmlFor="Email">Email</label>
             <input
+              required
               className="textBox"
               type="email"
               name="email"
@@ -44,6 +46,7 @@ function Signup() {
           <div>
             <label htmlFor="Password">Password</label>
             <input
+            required
               className="textBox"
               type="password"
               name="password"
@@ -53,8 +56,20 @@ function Signup() {
             />
           </div>
           <div>
+            <label htmlFor="Confirm Password">Confirm Password</label>
+            <input
+            required
+              className="textBox"
+              type="password"
+              name="confirmPass"
+              onChange={handleInputClick}
+              value={data.confirmPass}
+              placeholder="Confirm Password"
+            />
+          </div>
+          <div>
             <button className="submitBtn" type="submit">
-              Sign-up
+              Signup
             </button>
           </div>
         </div>

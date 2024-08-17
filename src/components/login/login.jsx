@@ -5,7 +5,6 @@ function Login() {
   const [data, setData] = useState({
     email: "",
     password: "",
-    confirmPass: "",
   });
 
   const handleInputClick = (e) => {
@@ -34,6 +33,7 @@ function Login() {
           <div>
             <label htmlFor="Email">Email</label>
             <input
+            required
               className="textBox"
               type="email"
               name="email"
@@ -45,23 +45,13 @@ function Login() {
           <div>
             <label htmlFor="Password">Password</label>
             <input
+            required
               className="textBox"
               type="password"
               name="password"
               onChange={handleInputClick}
               value={data.password}
               placeholder="Enter Password"
-            />
-          </div>
-          <div>
-            <label htmlFor="Confirm Password">Confirm Password</label>
-            <input
-              className="textBox"
-              type="password"
-              name="confirmPass"
-              onChange={handleInputClick}
-              value={data.confirmPass}
-              placeholder="Confirm Password"
             />
           </div>
           <div>

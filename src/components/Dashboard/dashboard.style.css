@@ -1,0 +1,47 @@
+.appWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.userName{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: large;
+    font-weight: 700;
+}
+
+.playListItem {
+    display: flex;
+    background-color: aqua;
+    align-items: center; 
+    justify-content: center;  
+    margin: 20px auto; 
+    border-radius: 50px;
+    height: 50px;
+    border: 1px solid black;
+    width: 200px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.playlistInput{
+    width: 200px;
+    height: 20px;
+    padding: 7px;
+    font-size: medium;
+    border-radius: 5px;
+}
+
+.addPlayListButton{
+    width: 50px;
+    margin-left: 10px;
+    height: 35px;
+    background-color: aquamarine;
+    /* padding: 4px; */
+    font-size: large;
+    border-radius: 5px;
+}
+
