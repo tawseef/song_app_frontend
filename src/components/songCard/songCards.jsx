@@ -1,7 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
+import { DataContext } from "../context/context";
 import "./songCard.style.css";
 
 function SongCards({ tracks }) {
+  const context = useContext(DataContext);
+  
+  const handlePlayTrack = (url) => {
+    context.setPlayTrack(url);
+  };
+
   return (
     <div className="cardWrapper">
       {tracks.map((ele) => (
@@ -12,7 +19,7 @@ function SongCards({ tracks }) {
           <div className="eleName">{ele.name.slice(0,19)}</div>
           <div className="eleArtist">Artists: {ele.artists[0].name}</div>
           <div className="audioTag">
-          <audio src={ele.preview_url} controls />
+            <button onClick={()=>handlePlayTrack(ele.preview_url)}> PLAY THIS </button>
             <div className="">
                 <button className="playlistButton">Add to Playlist</button>
             </div>
