@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import axios from "axios";
 import { DataContext } from "../context/context";
+import PlaylistDisplay from "../playlistDisplay/playlistDisplay";
 import "./dashboard.style.css";
 import SongCards from "../songCard/songCards";
 import AudioPlayer from "react-h5-audio-player";
@@ -21,7 +22,7 @@ function Dashboard() {
   const handleInputBlur = () => {
     context.setIsCreatingPlaylist(false); // Hide the input box on blur
     // Here you can add logic to save the playlist name if necessary
-    handleCreatePlaylistAPI();
+    if(context.playListname.length!==0) handleCreatePlaylistAPI();
   };
 
   const handleCreatePlaylistAPI = async () =>{
@@ -67,10 +68,15 @@ function Dashboard() {
       </div>
       <div className="">
         {
-          context.allPlaylist.length !== 0 ? context.allPlaylist : false 
+          context.allPlaylist.length !== 0 ? <PlaylistDisplay /> : false 
         }
       </div>
-      <div>{context.tracks && <SongCards tracks={context.tracks} />}</div>
+      <div>{ 
+      context.tracks ? 
+        <>{
+          context.tracks.length!==0 ? <SongCards tracks={context.tracks} /> : false
+        }</>
+      : false}</div>
     </div>
   );
 }

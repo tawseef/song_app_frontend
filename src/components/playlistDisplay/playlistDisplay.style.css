@@ -1,0 +1,32 @@
+.playlistDisplayWrapper {
+    display: flex;
+    flex-direction: row;  
+    flex-wrap: wrap;    
+    overflow-x: auto;         
+    padding: 10px;
+    gap:20px;
+    width: 100%;          
+    box-sizing: border-box;
+}
+
+.playlistDisplayContent {
+    flex: 0 0 auto;     
+    width: 150px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background-color: beige;
+    border: 1px solid black;
+    border-radius: 15px;
+    text-align: center;
+    justify-content: center;  
+    align-items: center;      
+    margin-left: 30px;        
+    box-sizing: border-box;
+}
+
+.playListTitle{
+    color: brown;
+    font-weight: bold;
+}

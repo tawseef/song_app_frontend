@@ -1,6 +1,8 @@
 import React, {useContext} from "react";
 import { DataContext } from "../context/context";
 import "./songCard.style.css";
+import axios from "axios";
+import {addTracksToPlaylist_API_URL} from "../../api";
 
 function SongCards({ tracks }) {
   const context = useContext(DataContext);
@@ -8,6 +10,21 @@ function SongCards({ tracks }) {
   const handlePlayTrack = (url) => {
     context.setPlayTrack(url);
   };
+
+  const handleAddToPlaylist = (ele) =>{
+    apiCallForAddInPlaylist(ele.name, ele.preview_url);
+    context.refreshPlaylists();
+  }
+
+  const apiCallForAddInPlaylist = async (name, url) =>{
+    const response = await axios.post(addTracksToPlaylist_API_URL, {
+        "email": "test@mail.com",
+        "playListname": context.playListname,
+        "trackName": name,
+        "previewURL": url
+    } 
+    )
+  }
 
   return (
     <div className="cardWrapper">
@@ -20,8 +37,8 @@ function SongCards({ tracks }) {
           <div className="eleArtist">Artists: {ele.artists[0].name}</div>
           <div className="audioTag">
             <button onClick={()=>handlePlayTrack(ele.preview_url)}> PLAY THIS </button>
-            <div className="">
-                <button className="playlistButton">Add to Playlist</button>
+            <div>
+                <button className="playlistButton" onClick={()=>handleAddToPlaylist(ele)}>Add to Playlist</button>
             </div>
           </div>
         </div>
