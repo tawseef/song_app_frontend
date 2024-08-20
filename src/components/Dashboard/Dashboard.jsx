@@ -6,13 +6,13 @@ import "./dashboard.style.css";
 import SongCards from "../songCard/songCards";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
-import {postCreatePlaylist_API_URL} from "../../api";
+import { postCreatePlaylist_API_URL } from "../../api";
 
 function Dashboard() {
   const context = useContext(DataContext);
 
   const handleCreatePlaylist = () => {
-    context.setIsCreatingPlaylist(true); 
+    context.setIsCreatingPlaylist(true);
   };
 
   const handleInputChange = (e) => {
@@ -20,30 +20,31 @@ function Dashboard() {
   };
 
   const handleInputBlur = () => {
-    context.setIsCreatingPlaylist(false); // Hide the input box on blur
-    // Here you can add logic to save the playlist name if necessary
-    if(context.playListname.length!==0) handleCreatePlaylistAPI();
+    context.setIsCreatingPlaylist(false);
+    if (context.playListname.length !== 0) handleCreatePlaylistAPI();
   };
 
-  const handleCreatePlaylistAPI = async () =>{
-    const response = await axios.post(postCreatePlaylist_API_URL, { email: "test@mail.com", playListname: context.playListname});
+  const handleCreatePlaylistAPI = async () => {
+    const response = await axios.post(postCreatePlaylist_API_URL, {
+      email: "test@mail.com",
+      playListname: context.playListname,
+    });
     console.log(response.data);
     context.refreshPlaylists();
-  }
+  };
 
   return (
     <div className="appWrapper">
       <div className="userName">Welcome User</div>
       <div className="">
-      <AudioPlayer
-         key={context.playTrack} 
+        <AudioPlayer
+          key={context.playTrack}
           className="audioPlayer"
           autoPlay
           src={context.playTrack}
           onPlay={(e) => console.log("onPlay")}
           style={{ width: "500px", border: "2px solid red" }}
         />
-
       </div>
       <div className="playListItem" onClick={handleCreatePlaylist}>
         + Create Playlist
@@ -67,16 +68,21 @@ function Dashboard() {
         )}
       </div>
       <div className="">
-        {
-          context.allPlaylist.length !== 0 ? <PlaylistDisplay /> : false 
-        }
+        {context.allPlaylist.length !== 0 ? <PlaylistDisplay /> : false}
       </div>
-      <div>{ 
-      context.tracks ? 
-        <>{
-          context.tracks.length!==0 ? <SongCards tracks={context.tracks} /> : false
-        }</>
-      : false}</div>
+      <div>
+        {context.tracks ? (
+          <>
+            {context.tracks.length !== 0 ? (
+              <SongCards tracks={context.tracks} />
+            ) : (
+              false
+            )}
+          </>
+        ) : (
+          false
+        )}
+      </div>
     </div>
   );
 }
