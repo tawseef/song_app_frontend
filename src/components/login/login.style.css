@@ -43,3 +43,49 @@ label {
     font-size: medium;
     font-weight: 700;
 }
+
+
+
+
+
+/* For devices with a width of 768px or less (Tablets and below) */
+@media screen and (max-width: 768px) {
+    .wrapper{
+        text-align: center;
+    }
+    
+    .form {
+        width: 300px;
+    }
+
+    .textBox {
+        font-size: medium;
+        height: 45px;
+    }
+
+    .submitBtn {
+        font-size: small;
+        height: 35px;
+    }
+}
+
+/* For devices with a width of 480px or less (Mobile phones) */
+@media screen and (max-width: 480px) {
+    .wrapper {
+        margin-top: 10px; 
+    }
+
+    .form {
+        width: 90%;
+    }
+
+    .textBox {
+        font-size: small;
+        height: 40px;
+    }
+
+    .submitBtn {
+        font-size: small;
+        height: 35px;
+    }
+}

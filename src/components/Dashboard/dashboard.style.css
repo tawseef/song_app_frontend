@@ -58,3 +58,89 @@
     align-items: center;
     box-sizing: border-box;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* Media query for screens less than 426px */
+@media (max-width: 425px) {
+    .titleBar {
+      flex-direction: column;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  
+    .userName {
+      font-size: medium;
+      margin-bottom: 10px;
+    }
+  
+    .playListItem {
+      width: 150px;
+      font-size: 0.9rem;
+    }
+  
+    .playlistInput {
+      width: 150px;
+    }
+  
+    .addPlayListButton {
+      width: 40px;
+      height: 30px;
+      font-size: medium;
+    }
+  
+    .logoutIcon {
+      height: 60px;
+      width: 60px;
+    }
+  
+    .audioPlayer {
+      width: auto !important;
+    }
+  }
+  
+  /* Media query for screens between 426px and 769px */
+  @media (min-width: 426px) and (max-width: 769px) {
+    .titleBar {
+      flex-direction: row;
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+  
+    .userName {
+      font-size: large;
+    }
+  
+    .playListItem {
+      width: 180px;
+      font-size: 1rem;
+    }
+  
+    .playlistInput {
+      width: 180px;
+    }
+  
+    .addPlayListButton {
+      width: 45px;
+      height: 35px;
+      font-size: medium;
+    }
+  
+    .logoutIcon {
+      height: 70px;
+      width: 70px;
+    }
+  
+    .audioPlayer {
+      width: auto !important; 
+    }
+  }
