@@ -12,19 +12,39 @@ function Login() {
     password: "",
   });
 
-  const handleLogIn = async (data)=>{
-    const userLogin = await axios.post(login_API_URL, data, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    
-    if (userLogin.status === 200) {
-      persistLogin(userLogin.data.token, userLogin.data.userid);
-      context.setUserEmail(data.email);
-      context.setIsLoggedIn(userLogin.data.isLoggedIn);
+  const handleLogIn = async (data) => {
+    try {
+        const userLogin = await axios.post(login_API_URL, data, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (userLogin.status === 200) {
+            persistLogin(userLogin.data.token, userLogin.data.userid);
+            context.setUserEmail(data.email);
+            context.setIsLoggedIn(userLogin.data.isLoggedIn);
+        } else {
+            console.error("Login failed:", userLogin);
+        }
+    } catch (error) {
+        console.error("Error during login:", error.response || error.message);
     }
-  }
+};
+
+  // const handleLogIn = async (data)=>{
+  //   const userLogin = await axios.post(login_API_URL, data, {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   });
+    
+  //   if (userLogin.status === 200) {
+  //     persistLogin(userLogin.data.token, userLogin.data.userid);
+  //     context.setUserEmail(data.email);
+  //     context.setIsLoggedIn(userLogin.data.isLoggedIn);
+  //   }
+  // }
 
   const persistLogin = (token, userid) => {
     localStorage.setItem("token", token);
