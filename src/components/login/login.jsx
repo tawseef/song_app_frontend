@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { DataContext } from "../context/context";
 import "./login.style.css";
 import axios from "axios";
@@ -28,6 +28,7 @@ function Login() {
 
   const persistLogin = (token, userid) => {
     localStorage.setItem("token", token);
+    localStorage.setItem("email", data.email);
     localStorage.setItem("isLoggedInId", userid);
   };
 

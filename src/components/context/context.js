@@ -15,10 +15,23 @@ export const DataProvider = (props) => {
   const [data, setData] = useState(null);
   const [tracks, setTracks] = useState([]);
   const [playListname, setPlayListname] = useState("");
-  const [playTrack, setPlayTrack] = useState("");
+  const [playTrack, setPlayTrack] = useState(null);
   const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
   const [allPlaylist, setAllPlaylist] = useState("");
   const [allPlaylistData, setAllPlaylistData] = useState([]);
+
+  useEffect(()=>{
+    const persistLoginFeature = () =>{
+      const getLocalStorageUserId = localStorage.getItem("isLoggedInId")
+      const getLocalStorageUserToken = localStorage.getItem("token")
+      const getLocalStorageUserEmail = localStorage.getItem("email")
+      if (getLocalStorageUserId && getLocalStorageUserToken && getLocalStorageUserEmail){
+        setIsLoggedIn(true);
+        setUserEmail(getLocalStorageUserEmail);
+      }
+    }
+    persistLoginFeature()
+  },[])
 
   useEffect(() => {
     const callAllTrackApi = async () => {

@@ -29,7 +29,7 @@ function Signup() {
       },
     });
     console.log("Form data:", data);
-    console.log("Result", userSignup);
+    if(userSignup.status===200) context.setUserSignup(true);
   };
 
   const handleLogIn =()=>{

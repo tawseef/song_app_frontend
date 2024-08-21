@@ -21,6 +21,12 @@
   text-align: left;
 }
 
+.createPlaylist {
+  font-weight: bold;
+  text-align: left;
+  color: grey;
+}
+
 .playlistItem {
   text-align: left;
   overflow-x: hidden;

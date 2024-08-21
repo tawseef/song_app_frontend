@@ -44,3 +44,17 @@
     border-radius: 5px;
 }
 
+.logoutIcon{
+    height:80px;
+    width: 80px;
+}
+
+.titleBar{
+    padding-left: 100px;
+    padding-right: 100px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}

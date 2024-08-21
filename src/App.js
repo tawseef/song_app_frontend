@@ -8,16 +8,15 @@ import { useContext } from "react";
 
 function App() {
   const context = useContext(DataContext);
+  
   return (
     <div>
       <Navbar />
-        {/* <Signup /> */}
         {
           context.isLoggedIn === true ? <Dashboard /> : 
           <>{
             context.userSignup === false ? <Signup /> : <Login/>
           }</>
-          // <Login />
         }
        
     </div>

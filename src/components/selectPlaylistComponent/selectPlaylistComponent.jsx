@@ -9,25 +9,27 @@ function SelectPlaylistComponent(props) {
 
 
   const handleAddToPlaylist = (ele) =>{
-        apiCallForAddInPlaylist(ele.name, ele.preview_url);
-        context.refreshPlaylists();
+    apiCallForAddInPlaylist(ele.name, ele.preview_url);
+    setTimeout(()=>{context.refreshPlaylists();},500)
   }
 
   const apiCallForAddInPlaylist = async (name, url) =>{
-        try{
-          await axios.post(addTracksToPlaylist_API_URL, {
-              "email": "test@mail.com",
-              "playListname": context.playListname,
-              "trackName": name,
-              "previewURL": url
-          } 
-          )
-        }catch(error){console.log(error)}
-      }
+    try{
+      await axios.post(addTracksToPlaylist_API_URL, {
+          "email": context.userEmail,
+          "playListname": context.playListname,
+          "trackName": name,
+          "previewURL": url
+      } 
+      )
+    }catch(error){
+      console.log(error);
+    }
+  }
 
   return (
     <div className='selectPlaylistWrapper'>
-        <div className='selectPlaylistTitle'>Select Playlist</div>
+      <div className='selectPlaylistTitle'>Select Playlist</div>
         {
           context.allPlaylist.length!==0? 
             context.allPlaylist.map((item, ind)=>(
@@ -39,7 +41,7 @@ function SelectPlaylistComponent(props) {
                 <hr />
               </div>
             ))
-          :<>Create Playlist</>
+          :<div className='createPlaylist'>Create Playlist</div>
         }
     </div>
   )

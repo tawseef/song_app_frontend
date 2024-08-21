@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import { DataContext } from "../context/context";
 import "./songCard.style.css";
 import SelectPlaylistComponent from "../selectPlaylistComponent/selectPlaylistComponent";
+import PlayLogo from "../../asset/play.png"; 
 
 function SongCards({ tracks }) {
   const context = useContext(DataContext);
@@ -37,10 +38,11 @@ function SongCards({ tracks }) {
           </div>
           <div className="eleName">{ele.name.slice(0, 19)}</div>
           <div className="eleArtist">Artists: {ele.artists[0].name}</div>
-          <div className="audioTag">
-            <button onClick={() => handlePlayTrack(ele.preview_url)}>
-              PLAY THIS
-            </button>
+          <div  className="audioTag">
+            <div onClick={() => handlePlayTrack(ele.preview_url)}>
+            <img  className="playLogo" src={PlayLogo} alt="not found"/>
+
+            </div>
             <div>
               <button
                 className="playlistButton"

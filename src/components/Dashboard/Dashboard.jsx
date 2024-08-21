@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { DataContext } from "../context/context";
 import PlaylistDisplay from "../playlistDisplay/playlistDisplay";
@@ -7,9 +7,33 @@ import SongCards from "../songCard/songCards";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { postCreatePlaylist_API_URL } from "../../api";
+import LogoutIcon from "../../asset/logout.png";
 
 function Dashboard() {
   const context = useContext(DataContext);
+  const [trackStartTime, setTrackStartTime] = useState(0);
+  const audioPlayerRef = useRef(null); 
+
+  const getStoredTrackTime = (trackId) => {
+    const storedTime = localStorage.getItem(`track-time-${trackId}`);
+    return storedTime ? parseFloat(storedTime) : 0;
+  };
+
+  const storeTrackTime = (trackURL, time) => {
+    localStorage.setItem(`track-time-${trackURL}`, time);
+  };
+
+  useEffect(() => {
+    if (context.playTrack) {
+      const startTime = getStoredTrackTime(context.playTrack);
+      setTrackStartTime(startTime);
+    }
+  }, [context.playTrack]);
+
+  useEffect(() => {
+    const audioElement = audioPlayerRef.current?.audio.current;
+    if (audioElement) audioElement.currentTime = trackStartTime; 
+  }, [trackStartTime]);
 
   const handleCreatePlaylist = () => {
     context.setIsCreatingPlaylist(true);
@@ -25,32 +49,42 @@ function Dashboard() {
   };
 
   const handleCreatePlaylistAPI = async () => {
-    const response = await axios.post(postCreatePlaylist_API_URL, {
-      email: "test@mail.com",
-      playListname: context.playListname,
-    });
-    console.log(response.data);
-    context.refreshPlaylists();
+    try{
+      const response = await axios.post(postCreatePlaylist_API_URL, {
+        email: context.userEmail,
+        playListname: context.playListname,
+      });
+      context.refreshPlaylists();
+    }catch(error){ throw error}
   };
 
-  const handleLogout = () =>{
+  const handleLogout = () => {
     context.setUserEmail(false);
     context.setIsLoggedIn(false);
     localStorage.clear();
-  }
+  };
+
+  const handleAudioPause = (e) => {
+    storeTrackTime(context.playTrack, e.target.currentTime);
+  };
 
   return (
     <div className="appWrapper">
-      <button onClick={handleLogout}>LOGOUT BUTTON</button>
+      <div className="titleBar">
       <div className="userName">Welcome User</div>
+      <div onClick={handleLogout}> <img src={LogoutIcon} alt="Not Found" className="logoutIcon"/></div>
+
+      </div>
       <div>
         <AudioPlayer
-          key={context.playTrack}
+          ref={audioPlayerRef} 
+          key={context.playTrack} 
           className="audioPlayer"
           autoPlay
           src={context.playTrack}
-          onPlay={(e) => console.log("onPlay")}
-          style={{ width: "500px", border: "2px solid red" }}
+          onPause={handleAudioPause} 
+          onEnded={handleAudioPause} 
+          style={{ width: "600px", border: "3px solid red", boxShadow: "5px 5px 15px" }}
         />
       </div>
       <div className="playListItem" onClick={handleCreatePlaylist}>
@@ -80,7 +114,7 @@ function Dashboard() {
       <div>
         {context.tracks ? (
           <>
-            {context.tracks.length !== 0 ||  context.tracks.length !== null ? (
+            {context.tracks.length !== 0 || context.tracks.length !== null ? (
               <SongCards tracks={context.tracks} />
             ) : (
               false
