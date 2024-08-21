@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import "./signup.style.css";
 import { DataContext } from "../context/context";
+import { signup_API_URL } from "../../api";
+import axios from "axios";
 
 function Signup() {
   const context = useContext(DataContext)
@@ -19,9 +21,15 @@ function Signup() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const userSignup = await axios.post(signup_API_URL, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
     console.log("Form data:", data);
+    console.log("Result", userSignup);
   };
 
   const handleLogIn =()=>{

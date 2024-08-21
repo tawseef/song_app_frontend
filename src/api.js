@@ -4,6 +4,7 @@
 // export const addTracksToPlaylist_API_URL = "http://localhost:8082/v1/addTracksToPlaylist";
 // export const getAllDataOfAllPlaylist_API_URL = "http://localhost:8082/v1/getTracksDetailsOfAllPlaylists";
 // export const login_API_URL = "http://localhost:8082/v1/login";
+// export const signup_API_URL = "http://localhost:8082/v1/signup";
 
 
 
@@ -14,6 +15,7 @@ export const postCreatePlaylist_API_URL = "https://songapp-k8yt.onrender.com/v1/
 export const addTracksToPlaylist_API_URL = "https://songapp-k8yt.onrender.com/v1/addTracksToPlaylist";
 export const getAllDataOfAllPlaylist_API_URL = "https://songapp-k8yt.onrender.com/v1/getTracksDetailsOfAllPlaylists";
 export const login_API_URL = "https://songapp-k8yt.onrender.com/v1/login";
+export const signup_API_URL = "https://songapp-k8yt.onrender.com/v1/signup";
 
 
 
