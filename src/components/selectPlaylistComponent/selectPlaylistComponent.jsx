@@ -3,21 +3,24 @@ import { DataContext } from '../context/context';
 import "./selectPlaylistComp.style.css";
 import axios from 'axios';
 import {addTracksToPlaylist_API_URL} from "../../api";
+import { enqueueSnackbar } from 'notistack';
 
 function SelectPlaylistComponent(props) {
   const context = useContext(DataContext);
 
-
-  const handleAddToPlaylist = (ele) =>{
-    apiCallForAddInPlaylist(ele.name, ele.preview_url);
-    setTimeout(()=>{context.refreshPlaylists();},500)
+  const handleAddToPlaylist = (ele, listname) =>{
+    apiCallForAddInPlaylist(ele.name, ele.preview_url, listname);
+    setTimeout(()=>{
+      context.refreshPlaylists();
+      enqueueSnackbar("Track Added To Playlist", { variant: 'info' })
+    },500)
   }
 
-  const apiCallForAddInPlaylist = async (name, url) =>{
+  const apiCallForAddInPlaylist = async (name, url, listname) =>{
     try{
       await axios.post(addTracksToPlaylist_API_URL, {
           "email": context.userEmail,
-          "playListname": context.playListname,
+          "playListname": listname,
           "trackName": name,
           "previewURL": url
       } 
@@ -31,11 +34,10 @@ function SelectPlaylistComponent(props) {
     <div className='selectPlaylistWrapper'>
       <div className='selectPlaylistTitle'>Select Playlist</div>
         {
-          context.allPlaylist.length!==0? 
+          context.allPlaylist.length!==0 ? 
             context.allPlaylist.map((item, ind)=>(
               <div className="playlistItem" key={ind+"key"} onClick={()=>{
-                console.log(item);
-                handleAddToPlaylist(props.data)
+                handleAddToPlaylist(props.data, item);
                 }}>
                 {item}
                 <hr />

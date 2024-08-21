@@ -8,6 +8,7 @@ import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { postCreatePlaylist_API_URL } from "../../api";
 import LogoutIcon from "../../asset/logout.png";
+import { enqueueSnackbar } from "notistack";
 
 function Dashboard() {
   const context = useContext(DataContext);
@@ -45,7 +46,9 @@ function Dashboard() {
 
   const handleInputBlur = () => {
     context.setIsCreatingPlaylist(false);
-    if (context.playListname.length !== 0) handleCreatePlaylistAPI();
+    if (context.playListname.length !== 0){ 
+      handleCreatePlaylistAPI()
+    };
   };
 
   const handleCreatePlaylistAPI = async () => {
@@ -55,6 +58,7 @@ function Dashboard() {
         playListname: context.playListname,
       });
       context.refreshPlaylists();
+      enqueueSnackbar("Playlist Created", { variant: 'info' })
     }catch(error){ throw error}
   };
 
@@ -62,6 +66,7 @@ function Dashboard() {
     context.setUserEmail(false);
     context.setIsLoggedIn(false);
     localStorage.clear();
+    enqueueSnackbar("Logout Successfully", { variant: 'success' })
   };
 
   const handleAudioPause = (e) => {
@@ -71,7 +76,9 @@ function Dashboard() {
   return (
     <div className="appWrapper">
       <div className="titleBar">
-      <div className="userName">Welcome User</div>
+      <div className="userName">
+        Welcome {context.userEmail}
+        </div>
       <div onClick={handleLogout}> <img src={LogoutIcon} alt="Not Found" className="logoutIcon"/></div>
 
       </div>

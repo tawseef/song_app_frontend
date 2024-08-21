@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import { DataContext } from "../context/context";
 import "./songCard.style.css";
 import SelectPlaylistComponent from "../selectPlaylistComponent/selectPlaylistComponent";
-import PlayLogo from "../../asset/play.png"; 
+import PlayLogo from "../../asset/play.png";
 
 function SongCards({ tracks }) {
   const context = useContext(DataContext);
@@ -38,10 +38,9 @@ function SongCards({ tracks }) {
           </div>
           <div className="eleName">{ele.name.slice(0, 19)}</div>
           <div className="eleArtist">Artists: {ele.artists[0].name}</div>
-          <div  className="audioTag">
+          <div className="audioTag">
             <div onClick={() => handlePlayTrack(ele.preview_url)}>
-            <img  className="playLogo" src={PlayLogo} alt="not found"/>
-
+              <img className="playLogo" src={PlayLogo} alt="not found" />
             </div>
             <div>
               <button
@@ -50,8 +49,10 @@ function SongCards({ tracks }) {
               >
                 Add to Playlist
               </button>
+            </div>
+            <div>
               {openPlaylistIndex === index && (
-                <div ref={playlistRef}>
+                <div className="selectFromPlaylist" ref={playlistRef}>
                   <SelectPlaylistComponent data={ele} />
                 </div>
               )}

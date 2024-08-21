@@ -47,32 +47,27 @@ export const DataProvider = (props) => {
 
   const refreshPlaylists = async () => {
     try {
-      const response = await axios.get(getAllDataOfAllPlaylist_API_URL);
+      const response = await axios.get(getAllDataOfAllPlaylist_API_URL, {
+        params: {
+          email: localStorage.getItem("email"),
+        },
+      });
       setAllPlaylistData(response.data);
-
-      const resp = await axios.get(getAllPlaylist_API);
-      setAllPlaylist(resp.data);
+      
+      const resp = await axios.get(getAllPlaylist_API, {
+        params: {
+          email: localStorage.getItem("email"),
+        },
+      });
+      if (resp.data.length !== 0) {
+        setAllPlaylist(resp.data);
+      } else setAllPlaylist([]);
     } catch (error) {
       console.error("Error refreshing playlists:", error);
     }
   };
 
   useEffect(() => {
-    const callGetPresentPlaylist = async () => {
-      try {
-        const resp = await axios.get(
-          "http://localhost:8082/v1/getAllPlaylists"
-        );
-        console.log(">>>>>>>>>>>", resp.data);
-        if (resp.data.length !== 0) {
-          setAllPlaylist(resp.data);
-          setPlayListname(resp.data[resp.data.length - 1]);
-        } else setAllPlaylist([]);
-      } catch (error) {
-        throw error;
-      }
-    };
-    callGetPresentPlaylist();
     refreshPlaylists();
   }, []);
 

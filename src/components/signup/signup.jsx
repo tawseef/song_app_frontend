@@ -3,6 +3,7 @@ import "./signup.style.css";
 import { DataContext } from "../context/context";
 import { signup_API_URL } from "../../api";
 import axios from "axios";
+import { enqueueSnackbar } from "notistack";
 
 function Signup() {
   const context = useContext(DataContext)
@@ -23,13 +24,17 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userSignup = await axios.post(signup_API_URL, data, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    console.log("Form data:", data);
-    if(userSignup.status===200) context.setUserSignup(true);
+    if(data.password === data.confirmPass){
+      const userSignup = await axios.post(signup_API_URL, data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if(userSignup.status===200) context.setUserSignup(true);
+      enqueueSnackbar("Signup Successful", { variant: 'success' })
+    }else{
+      enqueueSnackbar("Check Credentials", { variant: 'warning' })
+    }
   };
 
   const handleLogIn =()=>{

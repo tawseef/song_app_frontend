@@ -4,7 +4,7 @@ function Navbar() {
   return (
     <>
       <div className="navDiv">
-        <div className="contentNav">Navbar</div>
+        <div className="contentNav">Song_application</div>
       </div>
     </>
   );

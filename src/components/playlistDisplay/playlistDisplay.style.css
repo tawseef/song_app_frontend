@@ -10,7 +10,7 @@
 }
 
 .playlistDisplayContent {
-  width: 150px;
+  width: 200px;
   padding: 10px;
   flex-wrap: wrap;
   flex-direction: column;

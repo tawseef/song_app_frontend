@@ -9,13 +9,14 @@
     text-align: center;
     margin-top: 10px;
     margin-bottom: 10px;
-    font-size: large;
+    font-size: x-large;
     font-weight: 700;
 }
 
 .playListItem {
     display: flex;
-    background-color: aqua;
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgb(252, 93, 69) 100%);
+    color: white;
     align-items: center; 
     justify-content: center;  
     margin: 20px auto; 
@@ -23,8 +24,8 @@
     height: 50px;
     border: 1px solid black;
     width: 200px;
-    font-size: 1rem;
-    font-weight: 600;
+    font-size:larger;
+    font-weight: bold;
 }
 
 .playlistInput{
@@ -39,14 +40,16 @@
     width: 50px;
     margin-left: 10px;
     height: 35px;
-    background-color: aquamarine;
-    font-size: large;
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgb(252, 93, 69) 100%);
+    font-size:x-large;
+    font-weight: bold;
+    color: white;
     border-radius: 5px;
 }
 
 .logoutIcon{
-    height:80px;
-    width: 80px;
+    height:90px;
+    width: 90px;
 }
 
 .titleBar{

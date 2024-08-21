@@ -3,6 +3,8 @@ import { DataContext } from "../context/context";
 import "./login.style.css";
 import axios from "axios";
 import { login_API_URL } from "../../api";
+import { enqueueSnackbar } from 'notistack'
+
 
 function Login() {
   const context = useContext(DataContext);
@@ -14,37 +16,26 @@ function Login() {
 
   const handleLogIn = async (data) => {
     try {
-        const userLogin = await axios.post(login_API_URL, data, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        if (userLogin.status === 200) {
-            persistLogin(userLogin.data.token, userLogin.data.userid);
-            context.setUserEmail(data.email);
-            context.setIsLoggedIn(userLogin.data.isLoggedIn);
-        } else {
-            console.error("Login failed:", userLogin);
-        }
-    } catch (error) {
+      const userLogin = await axios.post(login_API_URL, data, {
+          headers: {
+              'Content-Type': 'application/json',
+          },
+      });
+      if (userLogin.status === 200) {
+          enqueueSnackbar("Login Successful", { variant: 'success' })
+          persistLogin(userLogin.data.token, userLogin.data.userid);
+          context.setUserEmail(data.email);
+          context.setIsLoggedIn(userLogin.data.isLoggedIn);
+      } else {
+        console.error("Login failed:", userLogin.status);
+      }
+      if (userLogin.status !== 200)
+      enqueueSnackbar("Login failed", { variant: 'error' })
+  } catch (error) {
+        enqueueSnackbar("Login failed", { variant: 'error' })
         console.error("Error during login:", error.response || error.message);
     }
-};
-
-  // const handleLogIn = async (data)=>{
-  //   const userLogin = await axios.post(login_API_URL, data, {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   });
-    
-  //   if (userLogin.status === 200) {
-  //     persistLogin(userLogin.data.token, userLogin.data.userid);
-  //     context.setUserEmail(data.email);
-  //     context.setIsLoggedIn(userLogin.data.isLoggedIn);
-  //   }
-  // }
+}
 
   const persistLogin = (token, userid) => {
     localStorage.setItem("token", token);
@@ -63,7 +54,6 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogIn(data);
-    console.log("Form data:", data);
   };
 
   const handleSignUp = () =>{

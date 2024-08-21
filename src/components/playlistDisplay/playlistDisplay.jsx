@@ -3,12 +3,12 @@ import { DataContext } from "../context/context";
 import "./playlistDisplay.style.css";
 import axios from "axios";
 import { deteleTrack_API_URL, deteleWholePlaylist_API_URL } from "../../api";
+import {enqueueSnackbar} from "notistack";
 
 function PlaylistDisplay() {
   const context = useContext(DataContext);
 
   const handlePlayTrack = (url) => {
-    console.log(url)
     context.setPlayTrack(url);
   };
 
@@ -25,7 +25,9 @@ function PlaylistDisplay() {
    }
 
     const deleteTrack = await axios.delete(deteleTrack_API_URL, { headers, data } )
-    console.log(deleteTrack.data);
+    if(deleteTrack.status===200){
+      enqueueSnackbar("Track Deleted", { variant: 'info' });      
+    }
     context.refreshPlaylists();
   }
 
@@ -38,8 +40,10 @@ function PlaylistDisplay() {
       email: context.userEmail,
       playListname: name
     }
-    const deletePlaylist = await axios.delete(deteleWholePlaylist_API_URL, {headers, data})
-    console.log(deletePlaylist.data);
+    const deletePlaylist = await axios.delete(deteleWholePlaylist_API_URL, {headers, data});
+    if(deletePlaylist.status === 200) {
+      enqueueSnackbar("Playlist Deleted", { variant: 'info' });
+    }
     context.refreshPlaylists();
   }
 
@@ -60,7 +64,8 @@ function PlaylistDisplay() {
                       key={idx + "key"}
                       onClick={() => handlePlayTrack(item.previewURL)}
                     >
-                      <div>{item.trackName}</div><div onClick={(e)=>{
+                      <div>{item.trackName.slice(0,10)}</div>
+                      <div onClick={(e)=>{
                         e.stopPropagation();
                         handleDeleteTrack(ele.playListname, item.trackName, item.previewURL)
                         }}>⛔</div>
