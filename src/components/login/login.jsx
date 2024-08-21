@@ -1,11 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { DataContext } from "../context/context";
 import "./login.style.css";
+import axios from "axios";
+import { login_API_URL } from "../../api";
 
 function Login() {
+  const context = useContext(DataContext);
+
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+
+  const handleLogIn = async (data)=>{
+    const userLogin = await axios.post(login_API_URL, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    if (userLogin.status === 200) {
+      persistLogin(userLogin.data.token, userLogin.data.userid);
+      context.setUserEmail(data.email);
+      context.setIsLoggedIn(userLogin.data.isLoggedIn);
+    }
+  }
+
+  const persistLogin = (token, userid) => {
+    localStorage.setItem("token", token);
+    localStorage.setItem("isLoggedInId", userid);
+  };
 
   const handleInputClick = (e) => {
     const { name, value } = e.target;
@@ -17,8 +41,13 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    handleLogIn(data);
     console.log("Form data:", data);
   };
+
+  const handleSignUp = () =>{
+    context.setUserSignup(false);    
+  }
 
   return (
     <div className="wrapper">
@@ -61,6 +90,9 @@ function Login() {
           </div>
         </div>
       </form>
+            <button className="submitBtn" type="submit" onClick={handleSignUp}>
+              Sign-Up
+            </button>
     </div>
   );
 }

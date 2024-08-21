@@ -1,19 +1,25 @@
 import "./App.css";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/login/login";
 import Signup from "./components/signup/signup";
 import Dashboard from "./components/Dashboard/Dashboard";
-import { DataProvider } from "./components/context/context";
+import { DataContext } from "./components/context/context";
+import { useContext } from "react";
 
 function App() {
+  const context = useContext(DataContext);
   return (
     <div>
       <Navbar />
-      <DataProvider>
-        {/* <Login /> */}
         {/* <Signup /> */}
-        <Dashboard />
-      </DataProvider>
+        {
+          context.isLoggedIn === true ? <Dashboard /> : 
+          <>{
+            context.userSignup === false ? <Signup /> : <Login/>
+          }</>
+          // <Login />
+        }
+       
     </div>
   );
 }

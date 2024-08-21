@@ -9,8 +9,11 @@ import {
 export const DataContext = createContext(null);
 
 export const DataProvider = (props) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userEmail, setUserEmail] = useState(false);
+  const [userSignup, setUserSignup] = useState(false);
   const [data, setData] = useState(null);
-  const [tracks, setTracks] = useState(null);
+  const [tracks, setTracks] = useState([]);
   const [playListname, setPlayListname] = useState("");
   const [playTrack, setPlayTrack] = useState("");
   const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
@@ -78,6 +81,12 @@ export const DataProvider = (props) => {
         refreshPlaylists,
         allPlaylistData,
         setAllPlaylistData,
+        isLoggedIn,
+        setIsLoggedIn,
+        userEmail,
+        setUserEmail,
+        userSignup,
+        setUserSignup
       }}
     >
       {props.children}

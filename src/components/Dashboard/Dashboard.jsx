@@ -33,10 +33,17 @@ function Dashboard() {
     context.refreshPlaylists();
   };
 
+  const handleLogout = () =>{
+    context.setUserEmail(false);
+    context.setIsLoggedIn(false);
+    localStorage.clear();
+  }
+
   return (
     <div className="appWrapper">
+      <button onClick={handleLogout}>LOGOUT BUTTON</button>
       <div className="userName">Welcome User</div>
-      <div className="">
+      <div>
         <AudioPlayer
           key={context.playTrack}
           className="audioPlayer"
@@ -73,7 +80,7 @@ function Dashboard() {
       <div>
         {context.tracks ? (
           <>
-            {context.tracks.length !== 0 ? (
+            {context.tracks.length !== 0 ||  context.tracks.length !== null ? (
               <SongCards tracks={context.tracks} />
             ) : (
               false

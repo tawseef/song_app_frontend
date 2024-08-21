@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./signup.style.css";
+import { DataContext } from "../context/context";
 
 function Signup() {
+  const context = useContext(DataContext)
+
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -20,6 +23,10 @@ function Signup() {
     e.preventDefault();
     console.log("Form data:", data);
   };
+
+  const handleLogIn =()=>{
+    context.setUserSignup(true)
+  }
 
   return (
     <div className="wrapper">
@@ -74,6 +81,9 @@ function Signup() {
           </div>
         </div>
       </form>
+            <button className="submitBtn" type="submit" onClick={handleLogIn}>
+              Login
+            </button>
     </div>
   );
 }
