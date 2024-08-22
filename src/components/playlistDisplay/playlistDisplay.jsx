@@ -27,8 +27,8 @@ function PlaylistDisplay() {
     const deleteTrack = await axios.delete(deteleTrack_API_URL, { headers, data } )
     if(deleteTrack.status===200){
       enqueueSnackbar("Track Deleted", { variant: 'info' });      
+      context.refreshPlaylists();
     }
-    context.refreshPlaylists();
   }
 
   const handleDeleteFullPlaylist = async (name) =>{
@@ -43,8 +43,8 @@ function PlaylistDisplay() {
     const deletePlaylist = await axios.delete(deteleWholePlaylist_API_URL, {headers, data});
     if(deletePlaylist.status === 200) {
       enqueueSnackbar("Playlist Deleted", { variant: 'info' });
+      context.refreshPlaylists();
     }
-    context.refreshPlaylists();
   }
 
   return (

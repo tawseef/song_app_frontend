@@ -47,6 +47,12 @@ export const DataProvider = (props) => {
 
   const refreshPlaylists = async () => {
     try {
+      const resp = await axios.get(getAllPlaylist_API, {
+        params: {
+          email: localStorage.getItem("email"),
+        },
+      });
+
       const response = await axios.get(getAllDataOfAllPlaylist_API_URL, {
         params: {
           email: localStorage.getItem("email"),
@@ -54,14 +60,10 @@ export const DataProvider = (props) => {
       });
       setAllPlaylistData(response.data);
       
-      const resp = await axios.get(getAllPlaylist_API, {
-        params: {
-          email: localStorage.getItem("email"),
-        },
-      });
       if (resp.data.length !== 0) {
         setAllPlaylist(resp.data);
       } else setAllPlaylist([]);
+
     } catch (error) {
       console.error("Error refreshing playlists:", error);
     }
