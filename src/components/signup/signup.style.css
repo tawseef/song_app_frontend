@@ -38,8 +38,18 @@ label {
 .submitBtn{
     height: 40px;
     border-radius: 10px;
-    background-color: rgb(43, 151, 43);
+    background-color: rgb(255, 136, 0);
     color: white;
     font-size: medium;
     font-weight: 700;
+}
+
+.logIn{
+    height: 40px;
+    width: 100px;
+    border-radius: 10px;
+    color: white;
+    font-size: medium;
+    font-weight: 700;
+    background-color: rgb(43, 151, 43);
 }

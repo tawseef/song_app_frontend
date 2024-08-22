@@ -94,7 +94,7 @@ function Signup() {
           </div>
         </div>
       </form>
-            <button className="submitBtn" type="submit" onClick={handleLogIn}>
+            <button className="logIn" type="submit" onClick={handleLogIn}>
               Login
             </button>
     </div>

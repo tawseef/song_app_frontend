@@ -95,14 +95,14 @@ function Login() {
             />
           </div>
           <div>
-            <button className="submitBtn" type="submit">
+            <button className="submitLoginBtn" type="submit">
               Login
             </button>
           </div>
         </div>
       </form>
-            <button className="submitBtn" type="submit" onClick={handleSignUp}>
-              Sign-Up
+            <button className="signUp" type="submit" onClick={handleSignUp}>
+              Sigup
             </button>
     </div>
   );

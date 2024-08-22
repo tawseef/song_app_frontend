@@ -29,6 +29,7 @@ function SelectPlaylistComponent(props) {
       console.log(error);
     }
   }
+  // console.log(context.allPlaylist);
 
   return (
     <div className='selectPlaylistWrapper'>
