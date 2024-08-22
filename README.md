@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+Project Structure
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Frontend (React.js/HTML/CSS/Javascript)
+    a. assets:
+        Contains different images and icon used in th Project.
 
-## Available Scripts
+    b. Components
+        i. context
+            The whole contextAPI of the application.
+        ii. Dashboard
+            The Dashboard of the user where user will land after logging in the application.
+        iii. Login
+            The Login Page of the application.
+        iv. Navbar
+            The Navbar of the whole application.
+        v. PlaylistDisplay
+            The PlaylistDisplay Component which will display only the PlayList created and the Tracks added to the PlayList by the user.
+        vi. SelectPlaylist
+            The SelectPlaylist Component will display only the names of the PlayList when user clicks on the Add To PlayList Button.
+        vi. Signup
+            The Signup Page of the application.
+        vii. SongCard
+            The SongCard Component will display all the card of the tracks available through the API.
+    
+    c. Api.js
+        This is the file where all different api's are defined for the application.
 
-In the project directory, you can run:
+How To Use The Application
+    A. The User will land on the Signup Page.
+    
+        if user is already has the account then the user has to Login from the Login Page. 
+        else needs to register.
 
-### `npm start`
+    B. After successful Login user will redirected to the Dashboard page.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    C. On the page user will see the cards of the tracks available from the API.
+            User can select any track to play it. 
+            User can create any number on playlist.
+            User can add any number of Tracks in the playlist.
+            User can delete any track from any playlist.
+            User can delete the whole playlist at any point of time.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Feature of the Application
+1. Authentication required for using the application.
+2. User persistancy is maintained.
+3. User can resume the track from where it gets paused or stoped.
+4. PlayList and Track details are stored in the database.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Application Link: 
+https://songapp-lake.vercel.app/
