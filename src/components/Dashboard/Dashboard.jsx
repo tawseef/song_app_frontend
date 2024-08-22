@@ -58,7 +58,8 @@ function Dashboard() {
         playListname: context.playListname,
       });
       context.refreshPlaylists();
-      enqueueSnackbar("Playlist Created", { variant: 'info' })
+      if(!response.data.success) enqueueSnackbar("Playlist Already Exists", { variant: 'warning' })
+      else enqueueSnackbar("Playlist Created", { variant: 'info' })
     }catch(error){ throw error}
   };
 
@@ -115,7 +116,7 @@ function Dashboard() {
           false
         )}
       </div>
-      <div className="">
+      <div>
         {context.allPlaylist.length !== 0 ? <PlaylistDisplay /> : false}
       </div>
       <div>
