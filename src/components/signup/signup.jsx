@@ -25,13 +25,22 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(data.password === data.confirmPass){
-      const userSignup = await axios.post(signup_API_URL, data, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      if(userSignup.status===200) context.setUserSignup(true);
-      enqueueSnackbar("Signup Successful", { variant: 'success' })
+      try{
+        const userSignup = await axios.post(signup_API_URL, data, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if(userSignup.status===200) context.setUserSignup(true);
+        enqueueSnackbar("Signup Successful", { variant: 'success' })
+      }catch(error){
+        if(error.response.status===401){
+          enqueueSnackbar("User Already Exist", { variant: 'error' })
+        }
+        else{
+          console.log(error)
+        }
+      }
     }else{
       enqueueSnackbar("Check Credentials", { variant: 'warning' })
     }

@@ -42,8 +42,9 @@ export const DataProvider = (props) => {
         throw error;
       }
     };
+    // if(userEmail)
     callAllTrackApi();
-  }, []);
+  }, [userEmail]);
 
   const refreshPlaylists = async () => {
     try {
